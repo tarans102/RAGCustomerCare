@@ -25,7 +25,7 @@ if not GROQ_API_KEY:
 
 groq_client = Groq(api_key=GROQ_API_KEY)
 FAQ_FILE = os.getenv("FAQ_FILE", "support_faq.txt")
-EMBEDDING_MODEL = "sentence-transformers/all-MiniLM-L6-v2"
+EMBEDDING_MODEL = "google/embeddinggemma-2-270m"
 MAX_QUESTION_LENGTH = 1000
 FALLBACK_MESSAGE = (
     "I couldn't find a reliable answer in the available FAQ. "
