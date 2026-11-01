@@ -3,3 +3,4 @@ uvicorn
 groq
 google-genai
 pydantic
+slowapi

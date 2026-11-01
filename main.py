@@ -10,11 +10,27 @@ from contextlib import asynccontextmanager
 from typing import List
 
 from fastapi import FastAPI, HTTPException
+from fastapi.staticfiles import StaticFiles
+from fastapi.responses import FileResponse
+from fastapi import Request
 from pydantic import BaseModel, Field, field_validator
 
 from groq import Groq
 from google import genai
 from google.genai import types
+
+from slowapi import Limiter, _rate_limit_exceeded_handler
+from slowapi.util import get_remote_address
+from slowapi.errors import RateLimitExceeded
+
+limiter = Limiter(key_func=get_remote_address)
+
+app.state.limiter = limiter
+
+app.add_exception_handler(
+    RateLimitExceeded,
+    _rate_limit_exceeded_handler
+)
 
 
 # ============================================================
@@ -436,6 +452,17 @@ app = FastAPI(
     lifespan=lifespan,
 )
 
+app.mount(
+    "/static",
+    StaticFiles(directory="static"),
+    name="static"
+)
+
+
+@app.get("/")
+def serve_frontend():
+    return FileResponse("static/index.html")
+
 
 # ============================================================
 # 14. REQUEST AND RESPONSE MODELS
@@ -504,13 +531,15 @@ def health_check():
     response_model=AskResponse,
     tags=["Customer Support"]
 )
-def ask_question(request: AskRequest):
+@limiter.limit("10/minute")
+@limiter.limit("100/hour")
+def ask_question(request: Request, body: AskRequest):
 
     start_time = time.perf_counter()
 
     try:
 
-        result = ask_support(request.question)
+        result = ask_support(body.question)
 
         elapsed_ms = round(
             (time.perf_counter() - start_time) * 1000,
@@ -525,7 +554,7 @@ def ask_question(request: AskRequest):
         )
 
         return AskResponse(
-            question=request.question,
+            question=body.question,
             answer=result["final_answer"],
             intent=result["intent"],
             sources=result["sources"],

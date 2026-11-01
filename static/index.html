@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Customer Support Assistant</title>
+
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+
+<body>
+
+    <div class="app-container">
+
+        <!-- Sidebar -->
+        <aside class="sidebar">
+
+            <div class="brand">
+                <div class="brand-icon">S</div>
+                <div>
+                    <h2>SupportDesk</h2>
+                    <span>Customer Assistance</span>
+                </div>
+            </div>
+
+            <button class="new-chat-btn" id="newChatBtn">
+                + New Conversation
+            </button>
+
+            <div class="sidebar-section">
+                <p class="sidebar-label">QUICK QUESTIONS</p>
+
+                <button class="suggestion" data-question="How can I track my order?">
+                    📦 Track my order
+                </button>
+
+                <button class="suggestion" data-question="What is your return and refund policy?">
+                    ↩️ Returns and refunds
+                </button>
+
+                <button class="suggestion" data-question="I forgot my password. How can I reset it?">
+                    🔐 Account access
+                </button>
+
+                <button class="suggestion" data-question="I was charged twice. What should I do?">
+                    💳 Payment issues
+                </button>
+
+                <button class="suggestion" data-question="The website is not loading. How can I fix it?">
+                    🛠️ Technical support
+                </button>
+            </div>
+
+            <div class="sidebar-footer">
+                <span class="status-dot"></span>
+                Support assistant online
+            </div>
+
+        </aside>
+
+
+        <!-- Main Chat -->
+        <main class="main-content">
+
+            <header class="topbar">
+
+                <div class="mobile-brand">
+                    <div class="brand-icon">S</div>
+                    <h2>SupportDesk</h2>
+                </div>
+
+                <div class="assistant-info">
+                    <div class="assistant-avatar">AI</div>
+
+                    <div>
+                        <h3>Support Assistant</h3>
+                        <span>Powered by AI</span>
+                    </div>
+                </div>
+
+                <div class="online-status">
+                    <span class="status-dot"></span>
+                    Online
+                </div>
+
+            </header>
+
+
+            <!-- Messages -->
+            <section class="chat-area" id="chatArea">
+
+                <div class="welcome-screen" id="welcomeScreen">
+
+                    <div class="welcome-icon">✦</div>
+
+                    <h1>How can we help you today?</h1>
+
+                    <p>
+                        Ask me anything about orders, returns,
+                        payments, account access, or technical issues.
+                    </p>
+
+                    <div class="welcome-cards">
+
+                        <button class="welcome-card" data-question="How can I track my order?">
+                            <span>📦</span>
+                            <strong>Track an order</strong>
+                            <small>Find shipment information</small>
+                        </button>
+
+                        <button class="welcome-card" data-question="How do I request a refund?">
+                            <span>💰</span>
+                            <strong>Request a refund</strong>
+                            <small>Understand the refund process</small>
+                        </button>
+
+                        <button class="welcome-card" data-question="How can I reset my password?">
+                            <span>🔐</span>
+                            <strong>Account help</strong>
+                            <small>Resolve sign-in issues</small>
+                        </button>
+
+                        <button class="welcome-card" data-question="How can I contact support?">
+                            <span>💬</span>
+                            <strong>Contact support</strong>
+                            <small>Get additional assistance</small>
+                        </button>
+
+                    </div>
+
+                </div>
+
+                <div id="messages" class="messages"></div>
+
+            </section>
+
+
+            <!-- Input -->
+            <footer class="input-section">
+
+                <form id="chatForm" class="input-container">
+
+                    <textarea id="messageInput" placeholder="Ask your question..." rows="1" maxlength="1000"
+                        required></textarea>
+
+                    <button type="submit" id="sendBtn" aria-label="Send message">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                            stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M22 2L11 13"></path>
+                            <path d="M22 2L15 22L11 13L2 9L22 2"></path>
+                        </svg>
+                    </button>
+
+                </form>
+
+                <p class="input-disclaimer">
+                    AI-generated responses may not always be accurate.
+                    Never share passwords or payment-card details.
+                </p>
+
+            </footer>
+
+        </main>
+
+    </div>
+
+    <script src="/static/script.js"></script>
+
+</body>
+
+</html>
