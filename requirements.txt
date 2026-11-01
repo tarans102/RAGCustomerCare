@@ -1,10 +1,5 @@
 fastapi
-uvicorn[standard]
+uvicorn
 groq
-langchain-community
-langchain-core
-langchain-huggingface
-langchain-text-splitters
-langgraph
-faiss-cpu
-sentence-transformers
+google-genai
+pydantic
